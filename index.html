@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mill's House Demo Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <style>
+        img {
+            image-rendering: pixelated;
+        }
+
+        .font-monospace {
+            font-family: 'Courier New', Courier, monospace !important;
+            font-weight: bold !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="mt-2">
+                <div class="position-relative">
+                    <img src="/static/centered%20house.png" class="img-fluid w-100"
+                        style="object-fit: fill; max-height:113px;">
+                    <img src="/static/window.png"
+                        class="img-fluid position-absolute top-50 start-50" style="max-height:34px;">
+                </div>
+
+                <div class="row position-relative col-8 offset-2">
+                    <img src="/static/navbg5.png" class="img-fluid w-100"
+                        style="max-height: 25px;">
+                    <div
+                        class="text-center text-white font-monospace align-bottom position-absolute top-0 start-50 translate-middle-x text-wrap h-100 align-items-center">
+                        nav bar probably</div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row position-relative">
+            <!-- <img src="/static/bodyscrollerwires.png" style="max-height: 145px;"> -->
+            <div id="leftborder" class="col-3 px-0 d-flex  flex-column justify-content-end  align-items-end bg-white"
+                style="margin-top: -0.1rem;">
+                <img src="/static/wireleft3.png" class="image-fluid d-flex"
+                    style="max-height: 145px !important; width: 5px">
+            </div>
+            <div id="contentspace" class="col-6 h-100">
+                <textarea rows="4" data-autoresize class="form-control bg-info"
+                    style="resize: none;">Type in this box to simulate adding a longer, like, blog post or something. The border will auto-expand to fit. (Also, this is basically a tumblr theme, lol.) </textarea>
+            </div>
+            <div id="rightborder" class="col-3 px-0 d-flex  flex-column" style="margin-top: -0.1rem;">
+                <img src="/static/wireright3.png" class="image-fluid d-flex"
+                    style="max-height: 145px !important; width: 2px;">
+            </div>
+        </div>
+
+        <div class="row position-relative">
+
+            <!-- <img src="/static/bodyscrollerwires.png" style="max-height: 145px;"> -->
+            <div class="col-3 px-0 d-flex justify-content-end bg-white" style="margin-top: -0.1rem;"> <img
+                    src="/static/wirefootleft2.png" class="image-fluid"
+                    style="max-height: 19px !important;">
+            </div>
+            <div class="col-6  px-0  d-flex" style="margin-top: -0.1rem;">
+                <img src="/static/wirefootmid2.png" class="image-fluid  align-top w-100"
+                    style="max-height: 19px !important;">
+            </div>
+            <div class="col-3 px-0 d-flex" style="margin-top: -0.1rem;">
+                <img src="/static/wirefootright2.png" class="image-fluid align-top"
+                    style="max-height: 19px !important;">
+            </div>
+            <img src="/static/foot3.png" class="img-fluid" style="margin-top: -12px;">
+        </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+    <script>
+        function fixlen() {
+            let leftborder = document.getElementById("leftborder");
+            let contentspace = document.getElementById("contentspace");
+            let rightborder = document.getElementById("rightborder");
+            var mulvar = Math.ceil(contentspace.offsetHeight / 145)
+            if (mulvar > 1) {
+                rightborder.innerHTML = (rightborder.children[0].outerHTML).repeat(mulvar);
+                leftborder.innerHTML = (leftborder.children[0].outerHTML).repeat(mulvar);
+            }
+            else {
+                rightborder.innerHTML = (rightborder.children[0].outerHTML)
+                leftborder.innerHTML = (leftborder.children[0].outerHTML)
+            }
+console.log(contentspace)
+        }
+        function addAutoResize() {
+            document.querySelectorAll('[data-autoresize]').forEach(function (element) {
+                element.style.boxSizing = 'border-box';
+                var offset = element.offsetHeight - element.clientHeight;
+                element.addEventListener('input', function (event) {
+                    event.target.style.height = 'auto';
+                    event.target.style.height = event.target.scrollHeight + offset + 'px';
+                    fixlen();
+                });
+                element.dispatchEvent(new Event('input', {}));
+                element.removeAttribute('data-autoresize');
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            addAutoResize()
+        });
+    </script>
+</body>
+
+</html>
